@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="js/mui.min.js"></script>
+    <link href="css/base.css" rel="stylesheet"/>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <link href="css/public.css" rel="stylesheet"/>
+    <link href="css/iconfont.css" rel="stylesheet"/>
+    <link href="css/orders.css" rel="stylesheet"/>
+	<script src="js/app.js"></script>
+    <script type="text/javascript" charset="utf-8">
+      	mui.init();
+    </script>
+</head>
+<body class='mui-fullscreen'>
+	<header class="mui-bar mui-bar-nav df jcsb aic">
+	   <i> </i><h2>购物车</h2><span><a href="">编辑</a></span>
+	</header>
+	<div id='content' class='mui-scroll-wrapper'>
+		<div class='mui-scroll'>
+			<section>
+				<div id='cart'>
+					<!--<div class='cart df aic jcsb'>
+						<div class="left df aic jcsb">
+							<div class='choose #checked#'></div>
+							<a href=""><img src="#src#" alt=""/></a>
+							<div class='introArea'>
+								<h4>#name#</h4>
+								<span class='style'>#intro#</span>
+								<p><i class='price'>#price#</i>元</p>
+							</div>
+						</div>
+						<div class="mui-numbox right df jcc">
+							<button class="sub mui-btn mui-btn-numbox-minus" type="button">-</button>
+							<input class="mui-input-numbox" type="number" value='#number#'/>
+							<button class="add mui-btn mui-btn-numbox-plus" type="button">+</button>
+						</div>
+					</div>-->
+				</div>
+				<div class="products" id='products'>
+					<ul class='df'>
+						<li>
+							<a href=""><img src="images/find1.jpg" alt="" /></a>
+							<div class='df fdc'>
+								<em>手机1号</em>
+								<i>超清拍照</i>
+								<p class='df jcsb aic'><span class='price'>333</span><i class='buy iconfont icon-gouwuche'></i></p>
+							</div>
+						</li>
+						<li>
+							<a href=""><img src="images/find2.jpg" alt="" /></a>
+							<div class='df fdc'>
+								<em>手机2号</em>
+								<i>超帅机身</i>
+								<p class='df jcsb aic'><span class='price'>444</span><i class='buy iconfont icon-gouwuche'></i></p>
+							</div>
+						</li>
+					</ul>
+					<ul class='df'>
+						<li>
+							<a href=""><img src="images/find3.jpg" alt="" /></a>
+							<div class='df fdc'>
+								<em>手机3号</em>
+								<i>超长待机</i>
+								<p class='df jcsb aic'><span class='price'>555</span><i class='buy iconfont icon-gouwuche'></i></p>
+							</div>
+						</li>
+						<li>
+							<a href=""><img src="images/find4.jpg" alt="" /></a>
+							<div class='df fdc'>
+								<em>手机4号</em>
+								<i>超好音质</i>
+								<p class='df jcsb aic'><span class='price'>666</span><i class='buy iconfont icon-gouwuche'></i></p>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</section>
+		</div>
+		
+	</div>
+	<div class="calculate df">
+		<div>总计 <span class='total'>0</span> 元</div>
+		<a href="">结算</a>
+	</div>
+	<nav class="mui-bar mui-bar-tab">
+	    <a class="mui-tab-item" href='index.html'>
+	        <span class="mui-icon mui-icon-home"></span>
+	        <span class="mui-tab-label">首页</span>
+	    </a>
+	    <a class="mui-tab-item" href='list.html'>
+	        <span class="mui-icon iconfont icon-tubiao3"></span>
+	        <span class="mui-tab-label">分类</span>
+	    </a>
+	    <a class="mui-tab-item" href='find.html'>
+	        <span class="mui-icon iconfont icon-faxian"></span>
+	        <span class="mui-tab-label">发现</span>
+	    </a>
+	    <a class="mui-tab-item mui-active" href='orders.html'>
+	        <span class="mui-icon iconfont icon-order"></span>
+	        <span class="mui-tab-label">购物车</span>
+	    </a>
+	    <a class="mui-tab-item" href='setting.html'>
+	        <span class="mui-icon iconfont icon-wode"></span>
+	        <span class="mui-tab-label">我的</span>
+	    </a>
+	</nav>
+	
+	<script id='template' type='text/template'>
+		<div class='cart df aic jcsb'>
+			<div class="left df aic jcsb">
+				<div class='choose #checked#'></div>
+				<a href=""><img src="#src#" alt=""/></a>
+				<div class='introArea'>
+					<h4>#name#</h4>
+					<span class='style'>#intro#</span>
+					<p><i class='price'>#price#</i>元</p>
+				</div>
+			</div>
+			<div class="mui-numbox right df jcc">
+				<button class="sub mui-btn mui-btn-numbox-minus" type="button">-</button>
+				<input class="mui-input-numbox" type="number" value='#number#'/>
+				<button class="add mui-btn mui-btn-numbox-plus" type="button">+</button>
+			</div>
+		</div>
+	</script>
+	<script>
+		mui('#content').scroll({
+			scrollY:true,
+			scrollX:false,
+			indicators:true,
+			deceleration:0.0006,
+			bounce:true
+		});
+		//初始加载购物车
+		mui(function(){
+			window.localStorage&&Cart.show();
+		});
+		var Storage={
+			getData:function(){
+				if(localStorage['shopsData']){
+					return JSON.parse(localStorage.getItem('shopsData'));
+				}else{
+					return [];
+				}
+			},
+			saveData:function(o){
+				localStorage.setItem('shopsData',JSON.stringify(o));
+			}
+		}
+		var Cart={
+			container:document.getElementById('cart'),
+			calculateArea:document.querySelector('.calculate .total'),
+			add:function(pSrc,pName,pIntro,pPrice,pNumber){
+				var obj=Storage.getData(),
+					i=obj.length;
+				while(i--)
+					if(obj[i].name===pName){
+						obj[i]['number']++;
+						break;
+					}
+				if(i===-1)
+					obj.push({
+						'src':pSrc,
+						'name':pName,
+						'intro':pIntro,
+						'price':pPrice,
+						'number':pNumber,
+						'check':true
+					});
+				Storage.saveData(obj);
+			},
+			show:function(){
+				var obj=Storage.getData(),i,len=obj.length,totalMoney=0;
+				this.container.innerHTML=useTemplate(obj);
+				for(i=0;i<len;i++){
+					if(obj[i].check){
+						totalMoney+=obj[i]['number']*obj[i].price;
+					}
+				}
+				this.calculateArea.innerHTML=totalMoney;
+			},
+			check:function(pName){
+				var obj=Storage.getData(),i,len=obj.length;
+				for(i=0;i<len;i++){
+					if(pName===obj[i].name){
+						obj[i].check=!obj[i].check;
+						break;
+					}
+				}
+				Storage.saveData(obj);
+			}
+		}
+		function useTemplate(o){
+			var newStr='',str='',
+				i,len=o.length;
+			for(i=0;i<len;i++){
+				str=document.getElementById('template').innerHTML;
+				str=str.replace('#src#',o[i].src);
+				str=str.replace('#name#',o[i].name);
+				str=str.replace('#intro#',o[i].intro);
+				str=str.replace('#price#',o[i].price);
+				str=str.replace('#number#',o[i]['number']);
+				str=str.replace('#checked#',o[i].check?'checked':'');
+				newStr+=str;
+			}
+			return newStr;
+		}
+		var muiCart=mui('#cart');
+		mui('#products').on('tap','.buy',function(){
+			var oContainer=this.parentNode.parentNode.parentNode,
+				pSrc=oContainer.querySelector('img').src,
+				pName=oContainer.querySelector('em').innerHTML,
+				pIntro=oContainer.querySelector('i').innerHTML,
+				pPrice=oContainer.querySelector('.price').innerHTML,
+				pNumber=1;
+			Cart.add(pSrc,pName,pIntro,pPrice,pNumber);
+			Cart.show();
+		});
+		muiCart.on('swipeleft','.cart',function(){
+			
+		});
+		muiCart.on('tap','.choose',function(){
+			var pName=this.parentNode.querySelector('h4').innerHTML;
+			Cart.check(pName);
+			Cart.show();
+		});
+		muiCart.on('tap','.right button',function(){
+			var obj=Storage.getData(),i=obj.length,
+				pName=this.parentNode.parentNode.querySelector('h4').innerHTML;
+			while(i--)
+				if(obj[i].name===pName){
+					this.classList.contains('add')&&obj[i]['number']++;
+					if(this.classList.contains('sub'))
+						if(obj[i]['number']>=2) obj[i]['number']--;
+						else{
+//							var btnArray = ['否', '是'];
+//							var res=mui.confirm('别想突破我的底线，是否删除订单？','亲爱的用户',btnArray,function(e){
+//								if(e.index==1){return true;}
+//								else{return false;}
+//							});
+							var res=window.confirm('是否将该物品移出购物车？');
+							if(res) obj.splice(i,1);
+						}
+					break;
+			}
+			Storage.saveData(obj);
+			Cart.show();
+		});
+	</script>
+</body>
+</html>

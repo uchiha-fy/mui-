@@ -1,0 +1,24 @@
+@charset "utf-8";
+.tc{text-align:center;}
+.db{display:block;}
+.bc{margin-left:auto;margin-right:auto;}
+.df{display:-webkit-box;display:-webkit-flex;display:flex;}
+.fdc{flex-direction:column;}
+.jcc{justify-content:center;}/*主轴居中对齐*/
+.jcsb{justify-content:space-between;}/*主轴两端对齐*/
+.jcsa{justify-content:space-around;}/*主轴等分*/
+.aic{align-items:center;}/*垂直主轴方向居中*/
+
+.fl{float:left;display:inline;}
+.fr{float:right;display:inline;}
+.clearfix:after{content:"";height: 0;display: block;overflow: hidden;visibility: hidden;clear:both;}
+.clearfix{*zoom:1;}
+
+.nowrap{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+
+html{font-size:37.5px;}
+body{font-size:0.32rem;}
+img{vertical-align:top;width:100%;}
+ul,ol{padding:0;list-style:none;}
+h1,h2,h3,h4,h5,h6{color:#333;font-weight:normal;margin:0;padding:0;}
+i,em{font-style:normal;}

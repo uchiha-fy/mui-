@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="js/mui.min.js"></script>
+    <link href="css/base.css" rel="stylesheet"/>
+    <link href="css/iconfont.css" rel="stylesheet"/>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <link href="css/public.css" rel="stylesheet"/>
+    <link href="css/list.css" rel="stylesheet"/>
+    <script src="js/app.js"></script>
+    <script type="text/javascript" charset="utf-8">
+      	mui.init();
+    </script>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav mui-bar-transparent df jcsb aic">
+	    <i class='iconfont icon-chazhao'></i><input class='search' type="text" name='search' placeholder="运动手表"><i class="iconfont icon-xiaoxi"></i>
+	</header>
+	<section>
+		<div class='left'>
+			<ul>
+				<li class='focus' data-index='0'>商品1</li>
+				<li data-index='1'>商品2</li>
+				<li data-index='2'>商品3</li>
+				<li data-index='3'>商品4</li>
+				<li data-index='4'>商品5</li>
+			</ul>
+		</div>
+		<div class='right'>
+			<div>
+				<div class='title'>1</div>
+				<div class="products"></div>
+			</div>
+			<div>
+				<div class='title'>2</div>
+				<div class="products"></div>
+			</div>
+			<div>
+				<div class='title'>3</div>
+				<div class="products"></div>
+			</div>
+			<div>
+				<div class='title'>4</div>
+				<div class="products"></div>
+			</div>
+			<div>
+				<div class='title'>5</div>
+				<div class="products"></div>
+			</div>
+		</div>
+	</section>
+	
+	<nav class="mui-bar mui-bar-tab">
+	    <a class="mui-tab-item" href='index.html'>
+	        <span class="mui-icon mui-icon-home"></span>
+	        <span class="mui-tab-label">首页</span>
+	    </a>
+	    <a class="mui-tab-item mui-active" href='list.html'>
+	        <span class="mui-icon iconfont icon-tubiao3"></span>
+	        <span class="mui-tab-label">分类</span>
+	    </a>
+	    <a class="mui-tab-item" href='find.html'>
+	        <span class="mui-icon iconfont icon-faxian"></span>
+	        <span class="mui-tab-label">发现</span>
+	    </a>
+	    <a class="mui-tab-item" href='orders.html'>
+	        <span class="mui-icon iconfont icon-order"></span>
+	        <span class="mui-tab-label">购物车</span>
+	    </a>
+	    <a class="mui-tab-item" href='setting.html'>
+	        <span class="mui-icon iconfont icon-wode"></span>
+	        <span class="mui-tab-label">我的</span>
+	    </a>
+	</nav>
+	<script>
+		var aSections=mui('.right>div'),
+			oRight=document.querySelector('.right'),
+			oLeft=document.querySelector('.left'),
+			aLis=mui('.left li'),
+			i=len=aSections.length,
+			oArr=[];
+		while(i--) oArr.unshift(aSections[i].offsetTop);
+		function removeFoucs(){
+			var focused=oLeft.querySelector('.focus');
+			focused.classList.remove('focus');
+		}
+		mui('.left').on('tap','li',function(){
+			oRight.scrollTop=aSections[this.dataset.index].offsetTop;
+			removeFoucs();
+			this.classList.add('focus');
+		});
+		function rightScroll(){
+			var currentTop=oRight.scrollTop,
+				minTop,currentIndex=0;
+				i;
+			minTop=Math.abs(currentTop-oArr[0]);
+			console.log(currentTop);
+			for(i=0;i<len;i++)
+				if(Math.abs(currentTop-oArr[i])<minTop){
+					minTop=Math.abs(currentTop-oArr[i]);
+					currentIndex=i;
+				}
+			removeFoucs();
+			aLis[currentIndex].classList.add('focus');
+		}
+		var rs=mui.buffer(rightScroll);//产生一个新函数
+		oRight.addEventListener('scroll',function(){
+			rs();//只有这样才能节流。
+//			mui.buffer(rightScroll)();//相当于一直产生新函数，理解为new新对象
+		});
+	</script>
+</body>
+</html>
